@@ -23,8 +23,7 @@ class App extends StatelessWidget {
             children: <Widget>[
               MarkupText(
                 "This is a (b)bold(/b) text (a https://flutter.dev)with a link(/a),"
-                " an (u)underlined(/u) word (a https://pub.dev)with"
-                " a second link containing a word in (i)italics(/i) (/a) and (color ffff0000)colored(/color) words"
+                " an (u)underlined(/u) word and (color ffff0000)colored(/color) words"
                 " (color FF7C4DFF)here(/color) and (color FF4CAF50)there(/color).",
                 style: MarkupTextStyle(
                   textStyle: const TextStyle(fontSize: 20),
