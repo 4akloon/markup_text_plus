@@ -1,10 +1,14 @@
 /// A class that helps in finding the position of tags in a text.
 class TagFinder {
   /// A regular expression to match the beginning of a tag.
-  static final _beginTagRegex = RegExp(r'\(([a-z_]+)(?:\s([^)]*))?\)');
+  static final _beginTagRegex = RegExp(
+    r'\(([a-z_]+)(?:\s([^)]*))?\)',
+  );
 
-  /// A regular expression to match the end of a tag.
-  static final _endTagRegex = RegExp(r'\(/([a-z_]+)\)');
+  /// A regular expression to match the beginning and end of a tag.
+  static final _beginAndEndTagRegex = RegExp(
+    r'\(([a-z_]+)(?:\s([^)]*))?\)|\(/([a-z_]+)\)',
+  );
 
   /// Constructor for a tag finder.
   ///
@@ -48,22 +52,33 @@ class TagFinder {
   }
 
   /// Finds the position of the end tag in the given text.
-  ///
-  /// Returns an [EndTagPosition] object if an end tag is found, otherwise returns null.
-  /// The [EndTagPosition] object contains the start and end positions of the end tag,
-  /// as well as the tag name.
-  EndTagPosition? findEndTag() {
-    final match = _endTagRegex.firstMatch(_text);
+  EndTagPosition? findEndTag(String tagName) {
+    final matches = _beginAndEndTagRegex.allMatches(_text);
 
-    if (match == null) return null;
+    final positions = matches
+        .map(MarkupTagPosition.fromMatch)
+        .where((p) => p.tagName == tagName)
+        .toList();
 
-    final tagName = match.group(1)!;
+    int state = 0;
 
-    return EndTagPosition(
-      start: match.start,
-      end: match.end,
-      tagName: tagName,
-    );
+    for (final position in positions) {
+      if (position is BeginTagPosition) {
+        state++;
+      } else {
+        state--;
+      }
+
+      if (state == 0) {
+        return EndTagPosition(
+          start: position.start,
+          end: position.end,
+          tagName: tagName,
+        );
+      }
+    }
+
+    return null;
   }
 }
 
@@ -75,6 +90,28 @@ abstract class MarkupTagPosition {
     required this.end,
     required this.tagName,
   });
+
+  /// A factory method to create a [MarkupTagPosition] object from a [Match].
+  factory MarkupTagPosition.fromMatch(Match match) {
+    final start = match.start;
+    final end = match.end;
+
+    if (match.group(1) case String tagName) {
+      return BeginTagPosition(
+        start: start,
+        end: end,
+        tagName: tagName,
+      );
+    } else if (match.group(3) case String tagName) {
+      return EndTagPosition(
+        start: start,
+        end: end,
+        tagName: tagName,
+      );
+    } else {
+      throw ArgumentError('Invalid match.');
+    }
+  }
 
   /// Represents the start and end indices of a tag in a text.
   ///

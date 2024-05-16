@@ -10,6 +10,7 @@ const _defaultTags = [
   ItalicMarkupTag(),
   UnderlineMarkupTag(),
   ColorMarkupTag(),
+  LinkMarkupTag(),
 ];
 
 /// A class which holds the style for the markup text.

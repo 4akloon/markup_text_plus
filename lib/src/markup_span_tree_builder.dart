@@ -27,12 +27,13 @@ class MarkupSpanTreeBuilder {
             :final tagName,
             :final arg,
             :final start,
+            :final end,
           )) {
         if (start == 0) {
           final tag = tags[tagName];
           if (tag case MarkupTag(:final isSelfClosing, :final buildSpan)) {
             if (!isSelfClosing) {
-              final endTagPosition = finder.findEndTag();
+              final endTagPosition = finder.findEndTag(tagName);
 
               if (endTagPosition != null) {
                 final innerText = text.substring(
@@ -41,22 +42,22 @@ class MarkupSpanTreeBuilder {
                 );
                 final innerChildren = buildTree(innerText);
 
-                children.add(buildSpan(context, innerChildren, arg));
+                children.add(buildSpan(context, innerText, innerChildren, arg));
                 text = text.substring(endTagPosition.end);
               } else {
                 final innerText = text.substring(beginTagPosition.end);
                 final innerChildren = buildTree(innerText);
 
-                children.add(buildSpan(context, innerChildren, arg));
+                children.add(buildSpan(context, innerText, innerChildren, arg));
                 text = '';
               }
             } else {
-              children.add(buildSpan(context, [], arg));
+              children.add(buildSpan(context, '', [], arg));
               text = text.substring(beginTagPosition.end);
             }
           } else {
-            children.add(TextSpan(text: text));
-            text = '';
+            children.add(TextSpan(text: text.substring(0, end)));
+            text = text.substring(end);
           }
         } else {
           children.add(TextSpan(text: text.substring(0, start)));

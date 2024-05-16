@@ -56,44 +56,37 @@ void main() {
     });
 
     test('findEndTag no tag', () {
-      const tagFinder = TagFinder('No tag here');
-      final endTagPosition = tagFinder.findEndTag();
+      const tagFinder = TagFinder('(tag) Some text');
+      final endTagPosition = tagFinder.findEndTag('tag');
 
       expect(endTagPosition, isNull);
     });
 
-    test('findEndTag with tag at 0', () {
+    test('findEndTag without begin', () {
       const tagFinder = TagFinder('(/tag)Some text');
-      final endTagPosition = tagFinder.findEndTag();
-
-      expect(endTagPosition, isNotNull);
-      expect(endTagPosition!.start, equals(0));
-      expect(endTagPosition.end, equals(6));
-      expect(endTagPosition.tagName, equals('tag'));
-    });
-
-    test('findEndTag with tag at 5', () {
-      const tagFinder = TagFinder('Some (/tag)text');
-      final endTagPosition = tagFinder.findEndTag();
-
-      expect(endTagPosition, isNotNull);
-      expect(endTagPosition!.start, equals(5));
-      expect(endTagPosition.end, equals(11));
-      expect(endTagPosition.tagName, equals('tag'));
-    });
-
-    test('findEndTag with unmatched tag', () {
-      const tagFinder = TagFinder('(/tag Some');
-      final endTagPosition = tagFinder.findEndTag();
+      final endTagPosition = tagFinder.findEndTag('tag');
 
       expect(endTagPosition, isNull);
     });
 
-    test('findEndTag with unmatched tag', () {
-      const tagFinder = TagFinder('(/t2ag');
-      final endTagPosition = tagFinder.findEndTag();
+    test('findEndTag with tag', () {
+      const tagFinder = TagFinder('(tag)Some (/tag)text');
+      final endTagPosition = tagFinder.findEndTag('tag');
 
-      expect(endTagPosition, isNull);
+      expect(endTagPosition, isNotNull);
+      expect(endTagPosition!.start, equals(10));
+      expect(endTagPosition.end, equals(16));
+      expect(endTagPosition.tagName, equals('tag'));
+    });
+
+    test('findEndTag with child tags', () {
+      const tagFinder = TagFinder('(tag)Some (tag)text(/tag) more text(/tag)');
+      final endTagPosition = tagFinder.findEndTag('tag');
+
+      expect(endTagPosition, isNotNull);
+      expect(endTagPosition!.start, equals(35));
+      expect(endTagPosition.end, equals(41));
+      expect(endTagPosition.tagName, equals('tag'));
     });
   });
 }

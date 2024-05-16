@@ -10,6 +10,7 @@ class BoldMarkupTag extends MarkupTag {
   @override
   InlineSpan buildSpan(
     BuildContext context,
+    String text,
     List<InlineSpan> children,
     String? arg,
   ) {

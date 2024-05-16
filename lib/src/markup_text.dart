@@ -27,8 +27,8 @@ class MarkupText extends StatelessWidget {
     final builder = MarkupSpanTreeBuilder(context, currentStyle.tags);
     final children = builder.buildTree(text);
 
-    return RichText(
-      text: TextSpan(
+    return Text.rich(
+      TextSpan(
         children: children,
         style: currentStyle.textStyle ?? DefaultTextStyle.of(context).style,
       ),
