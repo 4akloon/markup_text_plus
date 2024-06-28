@@ -2,7 +2,7 @@ library markup_text_plus;
 
 import 'package:flutter/material.dart';
 
-import 'markup_span_tree_builder.dart';
+import 'markup_text_span.dart';
 import 'style/markup_text_style.dart';
 
 /// A widget which displays text with markup.
@@ -24,13 +24,10 @@ class MarkupText extends StatelessWidget {
   Widget build(BuildContext context) {
     final currentStyle = style ?? MarkupTextStyle.of(context);
 
-    final builder = MarkupSpanTreeBuilder(context, currentStyle.tags);
-    final children = builder.buildTree(text);
-
     return Text.rich(
-      TextSpan(
-        children: children,
-        style: currentStyle.textStyle ?? DefaultTextStyle.of(context).style,
+      MarkupTextSpan(
+        text: text,
+        markupTextStyle: currentStyle,
       ),
     );
   }

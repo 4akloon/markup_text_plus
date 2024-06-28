@@ -16,8 +16,8 @@ class App extends StatelessWidget {
         appBar: AppBar(
           title: const MarkupText("(b)Markup(/b) (i)Example(/i)"),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(16),
+        body: const Padding(
+          padding: EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -26,7 +26,7 @@ class App extends StatelessWidget {
                 " an (u)underlined(/u) word and (color ffff0000)colored(/color) words"
                 " (color FF7C4DFF)here(/color) and (color FF4CAF50)there(/color).",
                 style: MarkupTextStyle(
-                  textStyle: const TextStyle(fontSize: 20),
+                  textStyle: TextStyle(fontSize: 20),
                 ),
               ),
             ],

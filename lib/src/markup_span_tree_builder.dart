@@ -6,10 +6,7 @@ import 'utils/tag_finder.dart';
 /// A class which builds the tree of [InlineSpan]s from the markup text.
 class MarkupSpanTreeBuilder {
   /// Constructor for a markup spine tree builder.
-  MarkupSpanTreeBuilder(this.context, this.tags);
-
-  /// The build context to use for building the tree.
-  final BuildContext context;
+  MarkupSpanTreeBuilder(this.tags);
 
   /// A map of the tags and their corresponding [MarkupTag]s.
   final Map<String, MarkupTag> tags;
@@ -42,17 +39,17 @@ class MarkupSpanTreeBuilder {
                 );
                 final innerChildren = buildTree(innerText);
 
-                children.add(buildSpan(context, innerText, innerChildren, arg));
+                children.add(buildSpan(innerText, innerChildren, arg));
                 text = text.substring(endTagPosition.end);
               } else {
                 final innerText = text.substring(beginTagPosition.end);
                 final innerChildren = buildTree(innerText);
 
-                children.add(buildSpan(context, innerText, innerChildren, arg));
+                children.add(buildSpan(innerText, innerChildren, arg));
                 text = '';
               }
             } else {
-              children.add(buildSpan(context, '', [], arg));
+              children.add(buildSpan('', [], arg));
               text = text.substring(beginTagPosition.end);
             }
           } else {

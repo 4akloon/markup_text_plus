@@ -9,12 +9,7 @@ class ColorMarkupTag extends MarkupTag {
   const ColorMarkupTag() : super('color');
 
   @override
-  InlineSpan buildSpan(
-    BuildContext context,
-    String text,
-    List<InlineSpan> children,
-    String? arg,
-  ) {
+  InlineSpan buildSpan(String text, List<InlineSpan> children, String? arg) {
     final color = arg != null ? parseColor(arg) : null;
 
     return TextSpan(

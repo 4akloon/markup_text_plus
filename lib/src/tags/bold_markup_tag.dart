@@ -8,12 +8,7 @@ class BoldMarkupTag extends MarkupTag {
   const BoldMarkupTag() : super('b');
 
   @override
-  InlineSpan buildSpan(
-    BuildContext context,
-    String text,
-    List<InlineSpan> children,
-    String? arg,
-  ) {
+  InlineSpan buildSpan(String text, List<InlineSpan> children, String? arg) {
     return TextSpan(
       children: children,
       style: const TextStyle(fontWeight: FontWeight.bold),

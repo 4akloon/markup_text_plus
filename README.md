@@ -5,12 +5,26 @@
 
 Flutter widget to use Markup to easily create formatted Text. It supports bold, italic, underlined, links, color and custom tags.
 
+## Features
+- Support for custom tags
+- Support for `TextSpan`
+
 ## Usage
 
 `MarkupText` is a wrapper for `RichText` that simplifies the creation of text with mixed styles.
 
 ```dart
 MarkupText("This is a (b)Markup(/b) example with (c deepPurple)a purple text(/c)")
+```
+
+Also, you can use `MarkupTextSpan` to create a `TextSpan` with mixed styles.
+
+```dart
+Text.rich(
+  MarkupTextSpan(
+    text: "This is a (b)Markup(/b) example with (c deepPurple)a purple text(/c)",
+  ),
+)
 ```
 
 ### style

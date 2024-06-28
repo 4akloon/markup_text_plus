@@ -15,12 +15,7 @@ class LinkMarkupTag extends MarkupTag {
   final Color? textColor;
 
   @override
-  InlineSpan buildSpan(
-    BuildContext context,
-    String text,
-    List<InlineSpan> children,
-    String? arg,
-  ) {
+  InlineSpan buildSpan(String text, List<InlineSpan> children, String? arg) {
     return TextSpan(
       text: text,
       recognizer: TapGestureRecognizer()

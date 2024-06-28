@@ -12,10 +12,5 @@ abstract class MarkupTag {
   bool get isSelfClosing => false;
 
   /// Builds the span for the tag.
-  InlineSpan buildSpan(
-    BuildContext context,
-    String text,
-    List<InlineSpan> children,
-    String? arg,
-  );
+  InlineSpan buildSpan(String text, List<InlineSpan> children, String? arg);
 }
