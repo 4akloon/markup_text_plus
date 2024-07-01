@@ -29,6 +29,7 @@ class MarkupText extends StatelessWidget {
         text: text,
         markupTextStyle: currentStyle,
       ),
+      style: currentStyle.textStyle,
     );
   }
 }
