@@ -9,4 +9,11 @@ jobs:
   publish:
     permissions:
       id-token: write 
-    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: subosito/flutter-action@v2
+    - run: dart pub get
+    - run: dart pub publish --dry-run
+    - run: dart pub publish --force
+
