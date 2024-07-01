@@ -9,10 +9,10 @@ jobs:
   publish:
     permissions:
       id-token: write 
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
     - uses: actions/checkout@v2
     - uses: subosito/flutter-action@v2
     - run: flutter pub get
-    - run: flutter pub publish --dry-run
-    - run: flutter pub publish --force
+    - run: dart pub publish --dry-run
+    - run: dart pub publish --force
