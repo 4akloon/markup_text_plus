@@ -1,4 +1,4 @@
-library markup_text_plus;
+library;
 
 import 'package:flutter/rendering.dart';
 

@@ -1,4 +1,4 @@
-library markup_text_plus;
+library;
 
 import 'package:flutter/material.dart';
 
@@ -28,8 +28,23 @@ class MarkupText extends StatelessWidget {
       MarkupTextSpan(
         text: text,
         markupTextStyle: currentStyle,
+        locale: currentStyle.locale,
+        semanticsLabel: currentStyle.semanticsLabel,
       ),
       style: currentStyle.textStyle,
+      strutStyle: currentStyle.strutStyle,
+      textAlign: currentStyle.textAlign,
+      textDirection: currentStyle.textDirection,
+      locale: currentStyle.locale,
+      softWrap: currentStyle.softWrap,
+      overflow: currentStyle.overflow,
+      textScaler: currentStyle.textScaler,
+      maxLines: currentStyle.maxLines,
+      semanticsLabel: currentStyle.semanticsLabel,
+      semanticsIdentifier: currentStyle.semanticsIdentifier,
+      textWidthBasis: currentStyle.textWidthBasis,
+      textHeightBehavior: currentStyle.textHeightBehavior,
+      selectionColor: currentStyle.selectionColor,
     );
   }
 }

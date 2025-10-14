@@ -1,4 +1,4 @@
-library markup_text_plus;
+library;
 
 import 'package:flutter/widgets.dart';
 
@@ -19,6 +19,19 @@ class MarkupTextStyle {
   const MarkupTextStyle({
     List<MarkupTag> tags = const [],
     this.textStyle,
+    this.strutStyle,
+    this.textAlign,
+    this.textDirection,
+    this.locale,
+    this.softWrap,
+    this.overflow,
+    this.textScaler,
+    this.maxLines,
+    this.semanticsLabel,
+    this.semanticsIdentifier,
+    this.textWidthBasis,
+    this.textHeightBehavior,
+    this.selectionColor,
   }) : _tags = tags;
 
   /// A factory method to get the [MarkupTextStyle] from the [BuildContext].
@@ -32,6 +45,45 @@ class MarkupTextStyle {
 
   /// The default text style for the markup text.
   final TextStyle? textStyle;
+
+  /// The strut style for the markup text.
+  final StrutStyle? strutStyle;
+
+  /// The text align for the markup text.
+  final TextAlign? textAlign;
+
+  /// The text direction for the markup text.
+  final TextDirection? textDirection;
+
+  /// The locale for the markup text.
+  final Locale? locale;
+
+  /// The soft wrap for the markup text.
+  final bool? softWrap;
+
+  /// The overflow for the markup text.
+  final TextOverflow? overflow;
+
+  /// The text scaler for the markup text.
+  final TextScaler? textScaler;
+
+  /// The max lines for the markup text.
+  final int? maxLines;
+
+  /// The semantics label for the markup text.
+  final String? semanticsLabel;
+
+  /// The semantics identifier for the markup text.
+  final String? semanticsIdentifier;
+
+  /// The text width basis for the markup text.
+  final TextWidthBasis? textWidthBasis;
+
+  /// The text height behavior for the markup text.
+  final TextHeightBehavior? textHeightBehavior;
+
+  /// The selection color for the markup text.
+  final Color? selectionColor;
 
   /// A map of the tags and their corresponding [MarkupTag]s.
   Map<String, MarkupTag> get tags {

@@ -1,4 +1,4 @@
-library markup_text_plus;
+library;
 
 export 'bold_markup_tag.dart';
 export 'color_markup_tag.dart';

@@ -1,4 +1,4 @@
-library markup_text_plus;
+library;
 
 export 'src/markup_text.dart';
 export 'src/markup_text_span.dart';
